@@ -17,7 +17,9 @@ namespace KomodoBadges
             {
                 Console.WriteLine("Welcome. Please choose option:\n" +
                     "1. Create a new badge\n" +
-                    "2. View all badges \n");
+                    "2. View all badges \n" +
+                    "3. Edit a badge \n" +
+                    "4. Exit");
                 string r = Console.ReadLine();
                 switch (r)
                 {
@@ -28,6 +30,14 @@ namespace KomodoBadges
                     case "2":
                         _badges.ViewAllBadges();
                         Console.Clear();
+                        break;
+                    case "3":
+                        _badges.EditBadge();
+                        Console.Clear();
+                        break;
+                    case "4":
+                        running = false;
+                        Environment.Exit(0);
                         break;
                     default:
                         Console.WriteLine("Please choose a valid option.");
