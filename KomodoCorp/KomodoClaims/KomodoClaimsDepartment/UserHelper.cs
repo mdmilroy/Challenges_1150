@@ -11,63 +11,53 @@ namespace KomodoClaimsDepartment
     class UserHelper
     {
         public int cid;
-        public List<Claim> _claims = new List<Claim>();
-        public List<Claim> _claimsHandled = new List<Claim>(); 
+        public List<Claim> claims = new List<Claim>();
+        public List<Claim> claimsHandled = new List<Claim>(); 
         
-        public ClaimsRepo GetAllClaims(ClaimsRepo claimsToGet)
+        public List<Claim> GetAllClaims(ClaimsRepo claimsToGet)
         {
-            if (_claims.Count < 1)
+            if (claimsToGet._claims.Count < 1)
             {
                 Console.WriteLine("There are no claims to view at this time.\n" +
                     "Press enter to return to the main menu.");
             }
             
-            return claimsToGet;
+            return claimsToGet._claims;
         }
 
-        public void GetClaimToHandle()
+        public Claim GetClaimToHandle(ClaimsRepo claimRepoToHandle)
         {
-            if (_claims.Count == 0)
+            Claim claimToHandle = null;
+            Claim nextClaim = claimRepoToHandle._claims[0];
+            Console.WriteLine("Here are the details of the next claim to be handled:\n" +
+                $"ClaimID: {nextClaim.ClaimID}\n" +
+                $"ClaimType: {nextClaim.ClaimType}\n" +
+                $"Description: {nextClaim.Description}\n" +
+                $"Ammount: ${nextClaim.Amount}\n" +
+                $"DateOfAccident: {nextClaim.DateOfAccident.ToString("MM/dd/yyyy")}\n" +
+                $"DateOfClaim: {nextClaim.DateOfClaim.ToString("MM/dd/yyyy")}\n" +
+                $"IsValid: {nextClaim.IsValid}\n\n");
+            Console.WriteLine("Would you like to deal with this claim now [y / n]?");
+            string response = Console.ReadLine();
+            switch (response)
             {
-                Console.WriteLine("There are no claims to handle at this time.\n" +
-                    "Press enter to return to the main menu.");
-                Console.ReadLine();
-                Console.Clear();
-            }
-            else
-            {
-                Claim nextClaim = _claims[0];
-                Console.WriteLine("Here are the details of the next claim to be handled:\n" +
-                    $"ClaimID: {nextClaim.ClaimID}\n" +
-                    $"ClaimType: {nextClaim.ClaimType}\n" +
-                    $"Description: {nextClaim.Description}\n" +
-                    $"Ammount: ${nextClaim.Amount}\n" +
-                    $"DateOfAccident: {nextClaim.DateOfAccident.ToString("MM/dd/yyyy")}\n" +
-                    $"DateOfClaim: {nextClaim.DateOfClaim.ToString("MM/dd/yyyy")}\n" +
-                    $"IsValid: {nextClaim.IsValid}\n\n");
-                Console.WriteLine("Would you like to deal with this claim now [y / n]?");
-                string response = Console.ReadLine();
-                if (response == "y")
-                {
-                    _claimsHandled.Add(nextClaim);
-                    Console.WriteLine("Your claim has been handled");
-                    _claims.Remove(nextClaim);
-                    Console.Clear();
-                }
-                else if (response == "n")
-                {
-                    Console.Clear();
-                }
-                else
-                {
-                    Console.WriteLine("Please enter an available option.");
+                case "y":
+                case "yes":
+                    claimToHandle = nextClaim;
+                    break;
+                case "n":
+                case "no":
+                    break;
+                default:
+                    Console.WriteLine("Please enter a valid option.");
                     Console.ReadLine();
                     Console.Clear();
-                }
+                    break;
             }
-}
+            return claimToHandle;
+        }
 
-        public Claim GetClaimToCreate(ClaimsRepo claimToCreate)
+        public Claim GetClaimToCreate()
         {
             cid++;
             string type = "undetermined";
@@ -171,26 +161,15 @@ namespace KomodoClaimsDepartment
             return claim;
         }
 
-        public void ViewHandledClaims()
+        public List<Claim> GetHandledClaims(ClaimsRepo claimsToGet)
         {
-            if (_claimsHandled.Count < 1)
+            if (claimsToGet._claimsHandled.Count < 1)
             {
-                Console.WriteLine("There are no handled claims to view at this time.\n" +
+                Console.WriteLine("There are no claims to view at this time.\n" +
                     "Press enter to return to the main menu.");
-                Console.ReadLine();
-                Console.Clear();
             }
-            else
-            {
-                Console.WriteLine(String.Format("{0, -15} {1, -15} {2, -15} {3, -15} {4, -15} {5, -15} {6, -15}", "ClaimID", "ClaimType", "Description", "Amount", "DateOfAccident", "DateOfClaim", "IsValid"));
-                foreach (Claim claim in _claimsHandled)
-                {
-                    Console.WriteLine(String.Format("{0, -15} {1, -15} {2, -15} {3, -15} {4, -15} {5, -15} {6, -15}", claim.ClaimID, claim.ClaimType, claim.Description, claim.Amount, claim.DateOfAccident.ToString("MM/dd/yyyy"), claim.DateOfClaim.ToString("MM/dd/yyyy"), claim.IsValid));
-                }
-                Console.WriteLine("\nPress enter to return to the main menu.");
-                Console.ReadLine();
-                Console.Clear();
-            }
+
+            return claimsToGet._claimsHandled;
         }
     }
 }

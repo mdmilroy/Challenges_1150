@@ -11,21 +11,21 @@ namespace KomodoClaimsDepartment
         public List<Claim> _claims = new List<Claim>();
         public List<Claim> _claimsHandled = new List<Claim>();
 
-        public List<Claim> ViewAllClaims(ClaimsRepo claims)
+        public List<Claim> ViewAllClaims(List<Claim> claimsToView)
         {
             Console.WriteLine(String.Format("{0, -15} {1, -15} {2, -15} {3, -15} {4, -15} {5, -15} {6, -15}", "ClaimID", "ClaimType", "Description", "Amount", "DateOfAccident", "DateOfClaim", "IsValid"));
-            foreach (Claim claim in claims._claims)
+            foreach (Claim claim in claimsToView)
             {
                 Console.WriteLine(String.Format("{0, -15} {1, -15} {2, -15} {3, -15} {4, -15} {5, -15} {6, -15}", claim.ClaimID, claim.ClaimType, claim.Description, claim.Amount, claim.DateOfAccident.ToString("MM/dd/yyyy"), claim.DateOfClaim.ToString("MM/dd/yyyy"), claim.IsValid));
             }
 
-            List<Claim> claimsToView = claims._claims;
             return claimsToView;
         }
 
-        public void HandleNextClaim()
+        public void HandleNextClaim(Claim claimToHandle)
         {
-            
+            _claimsHandled.Add(claimToHandle);
+            _claims.Remove(claimToHandle);
         }
 
         public void CreateNewClaim(Claim claimToAdd)
@@ -33,9 +33,15 @@ namespace KomodoClaimsDepartment
             _claims.Add(claimToAdd);
         }
 
-        public void ViewHandledClaims()
+        public List<Claim> ViewHandledClaims(List<Claim> handledClaims)
         {
-           
+            Console.WriteLine(String.Format("{0, -15} {1, -15} {2, -15} {3, -15} {4, -15} {5, -15} {6, -15}", "ClaimID", "ClaimType", "Description", "Amount", "DateOfAccident", "DateOfClaim", "IsValid"));
+            foreach (Claim claim in handledClaims)
+            {
+                Console.WriteLine(String.Format("{0, -15} {1, -15} {2, -15} {3, -15} {4, -15} {5, -15} {6, -15}", claim.ClaimID, claim.ClaimType, claim.Description, claim.Amount, claim.DateOfAccident.ToString("MM/dd/yyyy"), claim.DateOfClaim.ToString("MM/dd/yyyy"), claim.IsValid));
+            }
+
+            return handledClaims;
         }
     }
 }

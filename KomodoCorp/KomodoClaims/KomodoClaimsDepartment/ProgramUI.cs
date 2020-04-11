@@ -29,23 +29,51 @@ namespace KomodoClaimsDepartment
                 switch (response)
                 {
                     case "1":
-                        ClaimsRepo claimsToView = _helper.GetAllClaims(repo);
+                        List<Claim> claimsToView = _helper.GetAllClaims(repo);
                         repo.ViewAllClaims(claimsToView);
                         Console.ReadLine();
                         Console.Clear();
                         break;
                     case "2":
-                        repo.HandleNextClaim();
+                        Claim claimToHandle = new Claim();
+                        if (repo._claims.Count == 0)
+                        {
+                            Console.WriteLine("There are no claims to handle at this time.\n" +
+                                "Press enter to return to the main menu.");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+                        else
+                        {
+                            claimToHandle = _helper.GetClaimToHandle(repo);
+                        }
+
+                        if (claimToHandle != null)
+                        {
+                            repo.HandleNextClaim(claimToHandle);
+                            Console.WriteLine("Your claim has been handled");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+                        else
+                        {
+                            Console.WriteLine("No claim was handled.");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
                         break;
                     case "3":
-                        Claim claim = _helper.GetClaimToCreate(repo);
-                        repo.CreateNewClaim(claim);
+                        Claim claimToCreate = _helper.GetClaimToCreate();
+                        repo.CreateNewClaim(claimToCreate);
                         Console.WriteLine("Your claim has been added to the queue.");
                         Console.ReadLine();
                         Console.Clear(); 
                         break;
                     case "4":
-                        repo.ViewHandledClaims();
+                        List<Claim> handledClaimsToView = _helper.GetHandledClaims(repo);
+                        repo.ViewAllClaims(handledClaimsToView);
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case "5":
                         claimsMenu = false;

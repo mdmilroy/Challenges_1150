@@ -26,5 +26,10 @@ namespace KomodoClaimsDepartment
             DateOfClaim = claimed;
             IsValid = validity;
         }
+
+        public Claim()
+        {
+
+        }
     }
 }
