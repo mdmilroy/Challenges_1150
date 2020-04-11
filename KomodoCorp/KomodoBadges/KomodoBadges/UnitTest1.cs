@@ -34,21 +34,21 @@ namespace KomodoBadges
 
             // Assert
             int expected = 1;
-            int actual = _badges.ViewAllBadges().Count;
+            int actual = _badges.ViewAllBadges(_badges._allBadges).Count;
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void EditBadgesShouldChangeBadgeInfo ()
+        public void EditBadgesShouldChangeBadgeInfo()
         {
             // Arrange
-
+            newBadge.badgeAccess = _accessDoors;
 
             // Act
-
+            newBadge.badgeAccess.Remove("B1");
 
             // Assert
-
+            Assert.AreEqual(3, newBadge.badgeAccess.Count);
 
         }
 
