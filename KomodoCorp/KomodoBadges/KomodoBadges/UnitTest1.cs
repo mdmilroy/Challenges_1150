@@ -7,6 +7,14 @@ namespace KomodoBadges
     [TestClass]
     public class UnitTest1
     {
+        // TODO initialize new badge, repo, and lists here
+
+        [TestInitialize]
+        public void MyTestMethod()
+        {
+
+        }
+
         [TestMethod]
         public void CreateShouldAddItem()
         {
@@ -33,6 +41,12 @@ namespace KomodoBadges
             Assert.AreEqual(expectedBadges, actualBadges);
             Assert.AreEqual(expectedDoors, actualDoors);
             Assert.AreEqual(expectedDoors, actual);
+        }
+
+        [TestMethod]
+        public void DeleteShouldRemoveItemFromList()
+        {
+
         }
 
     }

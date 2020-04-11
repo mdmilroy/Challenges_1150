@@ -58,6 +58,7 @@
     <Compile Include="ProgramUI.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserInputHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
