@@ -41,6 +41,7 @@ namespace KomodoCafe
                         break;
                     default:
                         Console.WriteLine("Please select a valid option.");
+                        Console.Clear();
                         break;
                 }
             }

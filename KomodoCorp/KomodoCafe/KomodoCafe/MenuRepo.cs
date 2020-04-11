@@ -72,22 +72,24 @@ namespace KomodoCafe
         // TODO why won't this delete work?.......
         public void DeleteMenuItem()
         {
+            Console.Clear();
             if (_menu.Count > 0)
             {
-                foreach (Menu item in _menu)
+                bool finished = false;
+                while (!finished)
                 {
-                    Console.WriteLine($"{item.mealNumber} - {item.mealName}");
-                }
-
-                Console.WriteLine("Which item would you like to delete?");
-                string r = Console.ReadLine();
-
-                for (int i = 0; i < _menu.Count; i++)
-                {
-                    if (_menu[i].ToString() == r)
+                    for (int i = 0; i < _menu.Count; i++)
                     {
-                        _menu.RemoveAt(i);
+                        Console.WriteLine($"Number {_menu[i].mealNumber}: {_menu[i].mealName} \n");
                     }
+                    int r = Convert.ToInt32(Console.ReadLine());
+                    int indexToDelete = r - 1;
+                    _menu.RemoveAt(indexToDelete);
+                    finished = true;
+                    Console.WriteLine("Your item has been removed from the menu.\n" +
+                        "Press any key to return to the main menu.");
+                    Console.ReadLine();
+                    Console.Clear();
                 }
             }
             else
