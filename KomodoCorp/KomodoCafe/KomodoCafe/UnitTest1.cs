@@ -8,19 +8,42 @@ namespace KomodoCafe
     [TestClass]
     public class UnitTest1
     {
+        MenuRepo menu = new MenuRepo();
+        Menu item;
+        List<Menu> currentItems = new List<Menu>();
+
+        [TestInitialize]
+        public void MyTestMethod()
+        {
+            item = new Menu(1, "cheeseburger", "burger with fries and drink", "bun, beef, pickles, cheese", 4.99);
+            menu.CreateMenuItem(item);
+        }
+
         [TestMethod]
-        public void TestMethod1()
+        public void CreateShouldAddItem()
         {
             // Arrange
-            MenuRepo menu = new MenuRepo();
-            List<Menu> currentItems = new List<Menu>();
+
 
             // Act
-            Menu menu1 = new Menu(1, "cheeseburger", "burger with fries and drink", "bun, beef, pickles, cheese", 4.99);
-            currentItems.Add(menu1);
 
             // Assert
-            int actual = currentItems.Count();
+            int actual = menu.ViewAllMenuItems(menu.menu).Count;
+            Assert.AreEqual(1, actual);
+        }
+
+        [TestMethod]
+        public void RemoveItems()
+        {
+            // Arrange
+            Menu item2 = new Menu(2, "cheeseburger", "burger drink", "bun, beef, pickles, cheese", 3.99);
+            menu.CreateMenuItem(item2);
+
+            // Act
+            menu.DeleteMenuItem(item);
+
+            // Assert
+            int actual = menu.ViewAllMenuItems(menu.menu).Count;
             Assert.AreEqual(1, actual);
         }
     }

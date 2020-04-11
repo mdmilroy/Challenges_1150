@@ -22,5 +22,11 @@ namespace KomodoCafe
             ingredients = ingred;
             price = cost;
         }
+
+        public Menu()
+        {
+        
+        }
+
     }
 }

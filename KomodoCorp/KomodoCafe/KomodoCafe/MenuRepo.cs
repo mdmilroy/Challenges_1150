@@ -6,104 +6,26 @@ using System.Threading.Tasks;
 
 namespace KomodoCafe
 {
-    class MenuRepo
+    public class MenuRepo
     {
-        List<Menu> _menu = new List<Menu>();
-        public void CreateMenuItem()
+        public List<Menu> menu = new List<Menu>();
+        public void CreateMenuItem(Menu item)
         {
-            Console.Clear();
-            int num = _menu.Count + 1;
-            Console.WriteLine("What is the name of the item you wish to add?");
-            string name = Console.ReadLine();
-
-            Console.WriteLine("\nBriefly describe the menu item: ");
-            string desc = Console.ReadLine();
-
-            Console.WriteLine("\nPlease enter the list of ingredients:");
-            string ingred = Console.ReadLine();
-
-            bool priceInt = false;
-            double cost = 0;
-            while (!priceInt)
-            {
-                Console.WriteLine("\nWhat is the price for this item?");
-                string response = Console.ReadLine();
-                if (double.TryParse(response, out cost))
-                {
-                    cost = Convert.ToDouble(response);
-                    priceInt = true;
-                }
-                else
-                {
-                    Console.WriteLine("\nPlease enter a dollar amount.");
-                }
-            }
-
-            Menu newItem = new Menu(num, name, desc, ingred, cost);
-            _menu.Add(newItem);
-            Console.Clear();
-            Console.WriteLine("Your item has been added to the menu.\n" +
-                "Press any key to return to the main menu.");
-            Console.ReadLine();
-            Console.Clear();
+            menu.Add(item);
         }
-        public void ViewAllMenuItems()
+        public List<Menu> ViewAllMenuItems(List<Menu> repoToView)
         {
-            Console.Clear();
-            if (_menu.Count > 0)
+            Console.WriteLine("{0, -10} {1, -15}", "Item #", "Description");
+            foreach (Menu item in repoToView)
             {
-                foreach (Menu item in _menu)
-                {
-                    Console.WriteLine($"{item.mealNumber} - {item.mealName}");
-                }
-                Console.WriteLine("\n\nPress any key to return to the main menu.");
-                Console.ReadLine();
-                Console.Clear();
+                Console.WriteLine("{0, -10} {1, -15}", item.mealNumber, item.mealName);
             }
-            else
-            {
-                Console.WriteLine("There are currently no menu items to view.\n" +
-                    "Press any key to return to the main menu.");
-                Console.ReadLine();
-                Console.Clear();
-            }
+            return repoToView;
         }
 
-        // TODO why won't this delete work?.......
-        public void DeleteMenuItem()
+        public void DeleteMenuItem(Menu itemToRemove)
         {
-            Console.Clear();
-            if (_menu.Count > 0)
-            {
-                bool finished = false;
-                while (!finished)
-                {
-                    for (int i = 0; i < _menu.Count; i++)
-                    {
-                        Console.WriteLine($"Number {_menu[i].mealNumber}: {_menu[i].mealName} \n");
-                    }
-                    int r = Convert.ToInt32(Console.ReadLine());
-                    //int indexToDelete = r - 1;
-
-                    // THIS IS ONLY WORKING FOR THE FIRST ITEM REMOVED IF THEY ARE REMOVED FROM THE TOP.
-                    // INDEX CHANGES BUT THE MEAL NUMBER DOES NOT...
-
-                    _menu.RemoveAll(x => x.mealNumber == r);
-
-                    finished = true;
-                    Console.WriteLine("Your item has been removed from the menu.\n" +
-                        "Press any key to return to the main menu.");
-                    Console.ReadLine();
-                    Console.Clear();
-                }
-            }
-            else
-            {
-                Console.WriteLine("There are currently no menu items to view.\n" +
-                    "Press any key to return to the main menu.");
-                Console.ReadLine();
-                Console.Clear();
-            }
+            menu.RemoveAll(x => x.mealNumber == itemToRemove.mealNumber);
         }
     }
 }
