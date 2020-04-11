@@ -61,10 +61,12 @@ namespace KomodoBadges
             Console.Clear();
             if (allBadges.Count > 0)
             {
-                Console.WriteLine("{0, 5} {1, -10}", "Badge", "Access");
+                Console.WriteLine("{0, -15} {1, -10}", "Badge", "Access");
                 foreach (KeyValuePair<int, List<string>> item in allBadges)
                 {
-                    Console.WriteLine("{0, 5} {1, -15}", item.Key.ToString(), item.Value.ToString());
+                    // TRIED TO CONVERT TO ARRAY IN ORDER TO PRINT EACH ACCESS LIST ITEM... FAILED...
+                    // This finally worked!!! I misunderstood the default ToString() behavior.
+                    Console.WriteLine("{0, -15} {1, -10}", item.Key.ToString(), string.Join(", ", item.Value));
                 }
                 Console.WriteLine("Press any key to return to the main menu");
                 Console.ReadLine();
@@ -78,6 +80,22 @@ namespace KomodoBadges
             }
             Console.Clear();
             return allBadges;
+        }
+
+        public void EditBadge()
+        {
+            Console.Clear();
+            if (allBadges.Count > 0)
+            {
+
+            }
+            else
+            {
+                Console.WriteLine("Currently there are no badges in the system.\n" +
+                    "Press any key to return to the main menu");
+                Console.ReadLine();
+            }
+            Console.Clear();
         }
     }
 }
