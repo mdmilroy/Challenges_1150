@@ -8,44 +8,47 @@ namespace KomodoBadges
     public class UnitTest1
     {
         // TODO initialize new badge, repo, and lists here
+        BadgesRepo _badges = new BadgesRepo();
+        Badges newBadge = new Badges();
+        List<string> _accessDoors = new List<string>();
+        
 
         [TestInitialize]
         public void MyTestMethod()
         {
-
+            _accessDoors.Add("A4");
+            _accessDoors.Add("B1");
+            _accessDoors.Add("C6");
+            _accessDoors.Add("C7");
         }
 
         [TestMethod]
         public void CreateShouldAddItem()
         {
-            // Assign
-            BadgesRepo _badges = new BadgesRepo();
-            List<string> _accessDoors = new List<string>();
-            Dictionary<int, List<string>> _allBadges = new Dictionary<int, List<string>>();
+            // Arrange
+            newBadge.badgeAccess = _accessDoors;
 
             // Act
-            _accessDoors.Add("A4");
-            _accessDoors.Add("B1");
-            _accessDoors.Add("C6");
-            _accessDoors.Add("C7");
-            Badges newBadge = new Badges(1234, _accessDoors);
-            _allBadges.Add(newBadge.badgeID, newBadge.badgeAccess);
+            _badges.CreateBadge(newBadge);
+
 
             // Assert
-            int expectedBadges = 1;
-            int actualBadges = _allBadges.Count;
-            int expectedDoors = 4;
-            int actualDoors = _accessDoors.Count;
-            int actual = newBadge.badgeAccess.Count;
-
-            Assert.AreEqual(expectedBadges, actualBadges);
-            Assert.AreEqual(expectedDoors, actualDoors);
-            Assert.AreEqual(expectedDoors, actual);
+            int expected = 1;
+            int actual = _badges.ViewAllBadges().Count;
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void DeleteShouldRemoveItemFromList()
+        public void EditBadgesShouldChangeBadgeInfo ()
         {
+            // Arrange
+
+
+            // Act
+
+
+            // Assert
+
 
         }
 

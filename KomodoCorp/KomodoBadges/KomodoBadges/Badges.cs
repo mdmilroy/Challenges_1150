@@ -10,11 +10,5 @@ namespace KomodoBadges
     {
         public int badgeID;
         public List<string> badgeAccess;
-
-        public Badges(int id, List<string> doors)
-        {
-            badgeID = id;
-            badgeAccess = doors;
-        }
     }
 }

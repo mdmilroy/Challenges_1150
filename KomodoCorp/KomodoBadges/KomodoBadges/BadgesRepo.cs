@@ -8,64 +8,26 @@ namespace KomodoBadges
 {
     public class BadgesRepo
     {
-        private List<Badges> _badges = new List<Badges>();
-        private Dictionary<int, List<string>> allBadges = new Dictionary<int, List<string>>();
+        public Dictionary<int, List<string>> _allBadges = new Dictionary<int, List<string>>();
 
-        public void CreateBadge()
+        public void CreateBadge(Badges badgeToCreate)
         {
-
-            allBadges.Add(newBadge.badgeID, newBadge.badgeAccess);
-            
-            if (allBadges.ContainsKey(newBadge.badgeID))
-            {
-                // TODO: CANNOT GET THIS TO PRINT LIST OF ACCESS DOORS; IT PRINTS THE OBJECT.GETTYPE
-                Console.Clear();
-                Console.WriteLine($"You have successfully created badge number {newBadge.badgeID.ToString()}" +
-                    $" with access to doors {string.Join(", ", newBadge.badgeAccess)}");
-            }
-            else
-            {
-                Console.WriteLine("Your badge creation was unsuccessful. Please try again.");
-            }
-
-            Console.WriteLine("Press any key to return to the main menu.");
-            Console.ReadLine();
-            Console.Clear();
+            _allBadges.Add(badgeToCreate.badgeID, badgeToCreate.badgeAccess);
         }
+
     
         public Dictionary<int, List<string>> ViewAllBadges()
         {
-            Console.Clear();
-            if (allBadges.Count > 0)
-            {
-                Console.WriteLine("{0, -15} {1, -10}", "Badge", "Access");
-                foreach (KeyValuePair<int, List<string>> item in allBadges)
-                {
-                    // TRIED TO CONVERT TO ARRAY IN ORDER TO PRINT EACH ACCESS LIST ITEM... FAILED...
-                    // This finally worked!!! I misunderstood the default ToString() behavior.
-                    Console.WriteLine("{0, -15} {1, -10}", item.Key.ToString(), string.Join(", ", item.Value));
-                }
-                Console.WriteLine("Press any key to return to the main menu");
-                Console.ReadLine();
-                Console.Clear();
-            }
-            else
-            {
-                Console.WriteLine("Currently there are no badges in the system.\n" +
-                    "Press any key to return to the main menu");
-                Console.ReadLine();
-            }
-            Console.Clear();
-            return allBadges;
+                return _allBadges;
         }
 
         public void EditBadge()
         {
             Console.Clear();
-            if (allBadges.Count > 0)
+            if (_allBadges.Count > 0)
             {
                 Console.WriteLine("{0, -15}", "Badge");
-                foreach (KeyValuePair<int, List<string>> item in allBadges)
+                foreach (KeyValuePair<int, List<string>> item in _allBadges)
                 {
                     Console.WriteLine(item.Key.ToString());
                 }
@@ -73,9 +35,9 @@ namespace KomodoBadges
                 Console.WriteLine("Which badge would you like to edit?");
                 int badge = Convert.ToInt32(Console.ReadLine());
 
-                if (allBadges.ContainsKey(badge))
+                if (_allBadges.ContainsKey(badge))
                 {
-                    Console.WriteLine($"Badge {badge} has access to doors {string.Join(", ", allBadges[badge])}.\n");
+                    Console.WriteLine($"Badge {badge} has access to doors {string.Join(", ", _allBadges[badge])}.\n");
                     Console.WriteLine("1. Add a door \n" +
                         "2. Remove a door");
                     string r = Console.ReadLine();
@@ -89,7 +51,7 @@ namespace KomodoBadges
                             {
                                 Console.WriteLine("What door accessible?");
                                 string door = Console.ReadLine();
-                                allBadges[badge].Add(door);
+                                _allBadges[badge].Add(door);
                                 Console.WriteLine("\nMore doors?");
                                 string response = Console.ReadLine().ToLower();
 
@@ -107,10 +69,10 @@ namespace KomodoBadges
                         case "2":
                             while (moreDoors)
                             {
-                                Console.WriteLine($"Badge {badge} has access to doors {string.Join(", ", allBadges[badge])}.\n");
+                                Console.WriteLine($"Badge {badge} has access to doors {string.Join(", ", _allBadges[badge])}.\n");
                                 Console.WriteLine("What door would you like to remove?");
                                 string door = Console.ReadLine();
-                                allBadges[badge].Remove(door);
+                                _allBadges[badge].Remove(door);
                                 Console.WriteLine("\nMore doors?");
                                 string response = Console.ReadLine().ToLower();
 

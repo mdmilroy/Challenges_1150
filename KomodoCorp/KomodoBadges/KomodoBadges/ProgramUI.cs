@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace KomodoBadges
 {
-    public class ProgramUI
+    class ProgramUI
     {
+
+        private BadgesRepo _badges;
+        private UserInputHelper _helper;
+
         public void Run()
         {
-            BadgesRepo _badges = new BadgesRepo();
+            
             bool running = true;
 
             while (running)
@@ -20,22 +24,23 @@ namespace KomodoBadges
                     "2. View all badges \n" +
                     "3. Edit a badge \n" +
                     "4. Exit");
-                string r = Console.ReadLine();
-                switch (r)
+                string userInput = Console.ReadLine();
+                switch (Convert.ToInt32(userInput))
                 {
-                    case "1":
-                        _badges.CreateBadge();
-                        Console.Clear();
+                    case 1:
+                        _helper = new UserInputHelper();
+                        Badges badgeToCreate = _helper.GetBadgeToCreate();
+                        _badges.CreateBadge(badgeToCreate);
                         break;
-                    case "2":
+                    case 2:
+                        _helper = new UserInputHelper();
                         _badges.ViewAllBadges();
-                        Console.Clear();
                         break;
-                    case "3":
+                    case 3:
                         _badges.EditBadge();
                         Console.Clear();
                         break;
-                    case "4":
+                    case 4:
                         running = false;
                         Environment.Exit(0);
                         break;

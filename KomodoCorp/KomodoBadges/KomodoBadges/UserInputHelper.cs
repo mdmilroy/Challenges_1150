@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace KomodoBadges
 {
-    class UserInputHelper
+    public class UserInputHelper
     {
         public Badges GetBadgeToCreate()
         {
-            Console.Clear();
+            Badges badgeToCreate = new Badges();
             Random randID = new Random();
             int idnum = randID.Next(1000, 10000);
             List<string> access = new List<string>();
@@ -34,8 +34,9 @@ namespace KomodoBadges
                     Console.WriteLine("\nPlease enter [y] or [n]");
                 }
             }
-            Badges newBadge = new Badges(idnum, access);
-            return newBadge;
+            badgeToCreate.badgeID = idnum;
+            badgeToCreate.badgeAccess = access;
+            return badgeToCreate;
         }
     }
 }
