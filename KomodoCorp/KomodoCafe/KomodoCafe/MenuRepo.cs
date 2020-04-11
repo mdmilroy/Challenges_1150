@@ -83,8 +83,13 @@ namespace KomodoCafe
                         Console.WriteLine($"Number {_menu[i].mealNumber}: {_menu[i].mealName} \n");
                     }
                     int r = Convert.ToInt32(Console.ReadLine());
-                    int indexToDelete = r - 1;
-                    _menu.RemoveAt(indexToDelete);
+                    //int indexToDelete = r - 1;
+
+                    // THIS IS ONLY WORKING FOR THE FIRST ITEM REMOVED IF THEY ARE REMOVED FROM THE TOP.
+                    // INDEX CHANGES BUT THE MEAL NUMBER DOES NOT...
+
+                    _menu.RemoveAll(x => x.mealNumber == r);
+
                     finished = true;
                     Console.WriteLine("Your item has been removed from the menu.\n" +
                         "Press any key to return to the main menu.");
