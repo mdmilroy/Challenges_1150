@@ -41,9 +41,10 @@ namespace KomodoBadges
             
             if (allBadges.ContainsKey(newBadge.badgeID))
             {
+                // TODO: CANNOT GET THIS TO PRINT LIST OF ACCESS DOORS; IT PRINTS THE OBJECT.GETTYPE
                 Console.Clear();
                 Console.WriteLine($"You have successfully created badge number {newBadge.badgeID.ToString()}" +
-                    $" with access to doors {newBadge.badgeAccess.ToString()}");
+                    $" with access to doors {newBadge.badgeAccess}");
             }
             else
             {
@@ -53,6 +54,30 @@ namespace KomodoBadges
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();
             Console.Clear();
+        }
+    
+        public Dictionary<int, List<string>> ViewAllBadges()
+        {
+            Console.Clear();
+            if (allBadges.Count > 0)
+            {
+                Console.WriteLine("{0, 5} {1, -10}", "Badge", "Access");
+                foreach (KeyValuePair<int, List<string>> item in allBadges)
+                {
+                    Console.WriteLine("{0, 5} {1, -15}", item.Key.ToString(), item.Value.ToString());
+                }
+                Console.WriteLine("Press any key to return to the main menu");
+                Console.ReadLine();
+                Console.Clear();
+            }
+            else
+            {
+                Console.WriteLine("Currently there are no badges in the system.\n" +
+                    "Press any key to return to the main menu");
+                Console.ReadLine();
+            }
+            Console.Clear();
+            return allBadges;
         }
     }
 }

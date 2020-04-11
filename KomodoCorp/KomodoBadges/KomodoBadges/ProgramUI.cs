@@ -16,21 +16,26 @@ namespace KomodoBadges
             while (running)
             {
                 Console.WriteLine("Welcome. Please choose option:\n" +
-                    "1. Create a new badge.\n");
+                    "1. Create a new badge\n" +
+                    "2. View all badges \n");
                 string r = Console.ReadLine();
-                if (r == "1")
+                switch (r)
                 {
-                    _badges.CreateBadge();
-                    Console.Clear();
-                }
-                else
-                {
-                    Console.WriteLine("Please choose a valid option.");
-                    Console.ReadLine();
-                    Console.Clear();
+                    case "1":
+                        _badges.CreateBadge();
+                        Console.Clear();
+                        break;
+                    case "2":
+                        _badges.ViewAllBadges();
+                        Console.Clear();
+                        break;
+                    default:
+                        Console.WriteLine("Please choose a valid option.");
+                        Console.ReadLine();
+                        Console.Clear();
+                        break;
                 }
             }
-
         }
     }
 }
