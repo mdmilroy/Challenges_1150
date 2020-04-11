@@ -10,6 +10,7 @@ namespace KomodoClaimsDepartment
     {
         public void Run()
         {
+            UserHelper _helper = new UserHelper();
             ClaimsRepo repo = new ClaimsRepo();
             bool claimsMenu = true;
 
@@ -35,6 +36,9 @@ namespace KomodoClaimsDepartment
                         break;
                     case "3":
                         repo.CreateNewClaim();
+                        Console.WriteLine("Your claim has been added to the queue.");
+                        Console.ReadLine();
+                        Console.Clear(); 
                         break;
                     case "4":
                         repo.ViewHandledClaims();
