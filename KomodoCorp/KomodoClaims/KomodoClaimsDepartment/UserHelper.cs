@@ -14,27 +14,16 @@ namespace KomodoClaimsDepartment
         public List<Claim> _claims = new List<Claim>();
         public List<Claim> _claimsHandled = new List<Claim>(); 
         
-        public void GetAllClaims()
+        public ClaimsRepo GetAllClaims(ClaimsRepo claimsToGet)
         {
             if (_claims.Count < 1)
             {
                 Console.WriteLine("There are no claims to view at this time.\n" +
                     "Press enter to return to the main menu.");
-                Console.ReadLine();
-                Console.Clear();
             }
-            else
-            {
-                Console.WriteLine(String.Format("{0, -15} {1, -15} {2, -15} {3, -15} {4, -15} {5, -15} {6, -15}", "ClaimID", "ClaimType", "Description", "Amount", "DateOfAccident", "DateOfClaim", "IsValid"));
-                foreach (Claim claim in _claims)
-                {
-                    Console.WriteLine(String.Format("{0, -15} {1, -15} {2, -15} {3, -15} {4, -15} {5, -15} {6, -15}", claim.ClaimID, claim.ClaimType, claim.Description, claim.Amount, claim.DateOfAccident.ToString("MM/dd/yyyy"), claim.DateOfClaim.ToString("MM/dd/yyyy"), claim.IsValid));
-                }
-                Console.WriteLine("\nPress enter to return to the main menu.");
-                Console.ReadLine();
-                Console.Clear();
-            }
-}
+            
+            return claimsToGet;
+        }
 
         public void GetClaimToHandle()
         {
@@ -78,7 +67,7 @@ namespace KomodoClaimsDepartment
             }
 }
 
-        public Claim GetClaimToCreate()
+        public Claim GetClaimToCreate(ClaimsRepo claimToCreate)
         {
             cid++;
             string type = "undetermined";

@@ -29,13 +29,17 @@ namespace KomodoClaimsDepartment
                 switch (response)
                 {
                     case "1":
-                        repo.ViewAllClaims();
+                        ClaimsRepo claimsToView = _helper.GetAllClaims(repo);
+                        repo.ViewAllClaims(claimsToView);
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case "2":
                         repo.HandleNextClaim();
                         break;
                     case "3":
-                        repo.CreateNewClaim();
+                        Claim claim = _helper.GetClaimToCreate(repo);
+                        repo.CreateNewClaim(claim);
                         Console.WriteLine("Your claim has been added to the queue.");
                         Console.ReadLine();
                         Console.Clear(); 
