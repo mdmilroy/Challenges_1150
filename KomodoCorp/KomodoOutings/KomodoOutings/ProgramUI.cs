@@ -16,8 +16,21 @@ namespace KomodoOutings
 
             while (running)
             {
-                Console.WriteLine("What do you want to do? 1 or 2 or 3");
-                int response = Convert.ToInt32(Console.ReadLine());
+                int response = new int();
+
+                Console.WriteLine("What would you like to do? \n" +
+                    "1. Add an outing \n" +
+                    "2. View total costs of a certain outing type \n" +
+                    "3. Exit");
+                try
+                {
+                    response = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Please select an option provided.");
+                }
+
                 switch (response)
                 {
                     case 1:
