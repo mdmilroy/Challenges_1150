@@ -14,7 +14,8 @@ namespace KomodoOutings
         {
             allOutings.Add(outing);
         }
-        public List<Outings> ListAllOuting()
+
+        public List<Outings> ListAllOutings()
         {
             Console.WriteLine("{0} {1, -10} {2, -10}", "Date of Event", "Event Type", "# of Attendees");
             foreach (Outings outing in allOutings)
