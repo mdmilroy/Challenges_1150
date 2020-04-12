@@ -18,7 +18,7 @@ namespace KomodoOutings
             int expected = 1;
 
             // Assert
-            int actual = repo.ListAllOuting().Count;
+            int actual = repo.ListAllOutings().Count;
             Assert.AreEqual(expected, actual);
 
         }

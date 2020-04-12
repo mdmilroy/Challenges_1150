@@ -8,7 +8,7 @@ namespace KomodoOutings
 {
     public enum TypeOfEvent
     {
-        Golf, Bowling, AmusementPark, Concert
+        Unknown, Golf, Bowling, AmusementPark, Concert
     }
 
     public class Outings
